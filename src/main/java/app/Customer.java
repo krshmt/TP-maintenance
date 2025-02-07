@@ -18,20 +18,31 @@ class Customer {
     public String getName() {
         return name;
     }
-
-    public String statement() {
+    
+    public double getTotalCharge() {
         double totalAmount = 0;
-        int frequentRenterPoints = 0;
-        String result = "Rental Record for " + getName() + "\n";
         for (Rental each : rentals) {
-            // add frequent renter points
-            frequentRenterPoints += each.getFrequentRenterPoints();
-            // show figures for this rental
-            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(each.getCharge()) + "\n";
             totalAmount += each.getCharge();
         }
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+        return totalAmount;
+    }
+
+    public int getTotalFrequentRenterPoints() {
+        int frequentRenterPoints = 0;
+        for (Rental each : rentals) {
+            frequentRenterPoints += each.getFrequentRenterPoints();
+        }
+        return frequentRenterPoints;
+    }
+
+    public String statement() {
+        String result = "Rental Record for " + getName() + "\n";
+        for (Rental each : rentals) {
+            // show figures for this rental
+            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(each.getCharge()) + "\n";
+        }
+        result += "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
+        result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) + " frequent renter points";
         return result;
     }
 }

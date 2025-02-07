@@ -18,24 +18,32 @@ class Customer {
     public String getName() {
 <span class="fc" id="L19">        return name;</span>
     }
+    
+    public double getTotalCharge() {
+<span class="fc" id="L23">        double totalAmount = 0;</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        for (Rental each : rentals) {</span>
+<span class="fc" id="L25">            totalAmount += each.getCharge();</span>
+<span class="fc" id="L26">        }</span>
+<span class="fc" id="L27">        return totalAmount;</span>
+    }
+
+    public int getTotalFrequentRenterPoints() {
+<span class="fc" id="L31">        int frequentRenterPoints = 0;</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (Rental each : rentals) {</span>
+<span class="fc" id="L33">            frequentRenterPoints += each.getFrequentRenterPoints();</span>
+<span class="fc" id="L34">        }</span>
+<span class="fc" id="L35">        return frequentRenterPoints;</span>
+    }
 
     public String statement() {
-<span class="fc" id="L23">        double totalAmount = 0;</span>
-<span class="fc" id="L24">        int frequentRenterPoints = 0;</span>
-<span class="fc" id="L25">        String result = &quot;Rental Record for &quot; + getName() + &quot;\n&quot;;</span>
-<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (Rental each : rentals) {</span>
-            // add frequent renter points
-<span class="fc" id="L28">            frequentRenterPoints++;</span>
-            // add bonus for a two day new release rental
-<span class="fc bfc" id="L30" title="All 4 branches covered.">            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &amp;&amp; each.getDaysRented() &gt; 1)</span>
-<span class="fc" id="L31">                frequentRenterPoints++;</span>
+<span class="fc" id="L39">        String result = &quot;Rental Record for &quot; + getName() + &quot;\n&quot;;</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        for (Rental each : rentals) {</span>
             // show figures for this rental
-<span class="fc" id="L33">            result += &quot;\t&quot; + each.getMovie().getTitle() + &quot;\t&quot; + String.valueOf(each.getCharge()) + &quot;\n&quot;;</span>
-<span class="fc" id="L34">            totalAmount += each.getCharge();</span>
-        }
-<span class="fc" id="L36">        result += &quot;Amount owed is &quot; + String.valueOf(totalAmount) + &quot;\n&quot;;</span>
-<span class="fc" id="L37">        result += &quot;You earned &quot; + String.valueOf(frequentRenterPoints) + &quot; frequent renter points&quot;;</span>
-<span class="fc" id="L38">        return result;</span>
+<span class="fc" id="L42">            result += &quot;\t&quot; + each.getMovie().getTitle() + &quot;\t&quot; + String.valueOf(each.getCharge()) + &quot;\n&quot;;</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">        result += &quot;Amount owed is &quot; + String.valueOf(getTotalCharge()) + &quot;\n&quot;;</span>
+<span class="fc" id="L45">        result += &quot;You earned &quot; + String.valueOf(getTotalFrequentRenterPoints()) + &quot; frequent renter points&quot;;</span>
+<span class="fc" id="L46">        return result;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
